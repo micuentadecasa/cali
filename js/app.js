@@ -53,10 +53,9 @@ const App = (() => {
       ? `<button class="media-con-video" data-accion="video" aria-label="Ver vídeo de ${esc(e.nombre)}">${interior}</button>`
       : `<div class="media-con-video">${interior}</div>`;
     // el vídeo ocupa EL MISMO hueco que la imagen y arranca solo la primera vez
-    // el vídeo ocupa EL MISMO hueco que la imagen y arranca en cuanto lo abres
-    // (mute=1: iOS solo autorreproduce en silencio; el sonido se activa en el reproductor)
+    // (sin mute: ese parámetro dispara el error 153 de YouTube en vídeos con música)
     const mediaInterno = embedAbierto
-      ? `<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/${e.video}?playsinline=1&rel=0${yaSono ? "" : "&autoplay=1&mute=1"}"
+      ? `<iframe class="video-frame" src="https://www.youtube.com/embed/${e.video}?playsinline=1&rel=0${yaSono ? "" : "&autoplay=1"}"
           title="Vídeo de ${esc(e.nombre)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         <button class="cerrar-video" data-accion="video" aria-label="Cerrar vídeo">✕</button>`
       : `${clicable}
