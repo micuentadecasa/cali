@@ -46,25 +46,31 @@ const App = (() => {
     const embedAbierto = videoActivo === e.id && e.video;
     const embed = embedAbierto
       ? `<div class="video-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/${e.video}?autoplay=1&rel=0"
+          <iframe src="https://www.youtube-nocookie.com/embed/${e.video}?autoplay=1&playsinline=1&rel=0"
             title="Vídeo de ${esc(e.nombre)}" allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen></iframe>
           <button class="cerrar-video" data-accion="video" aria-label="Cerrar vídeo">✕</button>
         </div>`
       : "";
-    const media = e.img
-      ? `<div class="media-con-video"><img src="${e.img}" alt="${esc(e.nombre)}" loading="lazy">${e.video
-          ? `<button class="btn-play-mini" data-accion="video" aria-label="Ver vídeo">▶</button>`
-          : ""}</div>`
-      : (e.video
-          ? `<button class="marcador-video" data-accion="video" aria-label="Ver vídeo de ${esc(e.nombre)}">▶</button>`
-          : `<a class="marcador-video" href="${videoUrl}" target="_blank" rel="noopener" aria-label="Ver vídeo de ${esc(e.nombre)}">▶</a>`);
+    const etiqueta = esc(e.grupo ? (GRUPOS[e.grupo] || e.grupo) : (CATEGORIAS[e.categoria] ? CATEGORIAS[e.categoria].nombre : e.categoria || ""));
+    const interior = e.img
+      ? `<img src="${e.img}" alt="${esc(e.nombre)}" loading="lazy"><div class="media-velo"></div>`
+      : "";
+    const clicable = e.video
+      ? `<button class="media-con-video" data-accion="video" aria-label="Ver vídeo de ${esc(e.nombre)}">${interior}</button>`
+      : `<div class="media-con-video">${interior}</div>`;
+    const media = `
+      <div class="tarjeta-media">
+        ${clicable}
+        <span class="grupo-tag">${etiqueta}</span>
+        <h3 class="tarjeta-titulo">${esc(e.nombre)}<b class="duracion">${e.segundos}s</b></h3>
+        ${e.video ? `<span class="btn-play-mini">▶</span>` : ""}
+      </div>`;
     return `
       <article class="tarjeta ${actual ? "actual" : ""} ${hecho ? "hecha" : ""}" data-id="${e.id}">
         ${embed}
-        <div class="tarjeta-media">${media}</div>
+        ${media}
         <div class="tarjeta-cuerpo">
-          <header><h3>${esc(e.nombre)}</h3><span class="duracion">${e.segundos}s</span></header>
           ${e.notaHombro ? `<p class="nota-hombro">⚠️ ${esc(e.notaHombro)}</p>` : ""}
           <ul class="claves">${e.claves.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
           <div class="enlaces">
@@ -90,8 +96,8 @@ const App = (() => {
   // ── Sesión ──────────────────────────────────────────────────────────────
   function renderSesion(full = false) {
     if (!full) { actualizarConteo(); return; }
-    // si avanzamos de ejercicio, cierra el vídeo del anterior
-    if (videoActivo && Sesion.actual() && Sesion.actual().id !== videoActivo) videoActivo = null;
+    // solo cierra el vídeo si su ejercicio ya no está en la sesión actual
+    if (videoActivo && !Sesion.ejercicios().some((e) => e.id === videoActivo)) videoActivo = null;
     const ejercicios = Sesion.ejercicios();
     const resumen = Sesion.resumen();
     const p = Sesion.progreso();

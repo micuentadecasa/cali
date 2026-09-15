@@ -8,9 +8,11 @@
  *  - `wger`: id en wger.de para enlazar ficha/vídeo (CC-BY-SA). */
 const EJERCICIOS = [
   // ── Calentamiento / movilidad ──────────────────────────────────────────
-  { id: "marcha-suave", video: "0e4251eQAE8", nombre: "Marcha en el sitio", categoria: "calentamiento", segundos: 60, emoji: "🚶",
+  { id: "marcha-suave", video: "0e4251eQAE8", nombre: "Marcha en el sitio", categoria: "calentamiento", segundos: 60,
+    img: "assets/img/video-marcha-suave.jpg",
     claves: ["Pasos suaves, sin saltar", "Brazos relajados a la altura de la cintura", "Respira por la nariz"] },
-  { id: "circulos-hombros", video: "8xQao07OrF0", nombre: "Círculos de hombro suaves", categoria: "calentamiento", segundos: 40, emoji: "🔄",
+  { id: "circulos-hombros", video: "8xQao07OrF0", nombre: "Círculos de hombro suaves", categoria: "calentamiento", segundos: 40,
+    img: "assets/img/video-circulos-hombros.jpg",
     notaHombro: "Rango corto y sin dolor; para si notas pinchazo",
     claves: ["Hombros arriba, atrás y abajo", "Círculos pequeños, 20 s por sentido"] },
   { id: "gato-camello", video: "J99uL4J5khE", nombre: "Gato–camello", categoria: "calentamiento", segundos: 40,
@@ -34,6 +36,7 @@ const EJERCICIOS = [
     img: "assets/img/elevacion-talones.png", wger: 1243,
     claves: ["Sube los talones despacio", "Baja controlando", "Apóyate en la pared si hace falta"] },
   { id: "wall-sit", video: "-qXuHrdmk4g", nombre: "Sentadilla isométrica en pared", categoria: "fuerza", grupo: "piernas", segundos: 40,
+    img: "assets/img/video-wall-sit.jpg",
     claves: ["Espalda pegada a la pared", "Muslos paralelos al suelo", "Peso en los talones"] },
   { id: "step-ups", video: "vr2c1xKRmvU", nombre: "Step-ups en escalón", categoria: "fuerza", grupo: "piernas", segundos: 45,
     img: "assets/img/step-ups.png", wger: 981,
@@ -58,8 +61,10 @@ const EJERCICIOS = [
     img: "assets/img/bird-dog.png", wger: 1572,
     claves: ["A cuatro patas", "Estira brazo y pierna contrarios", "Cadera estable, sin arquear la lumbar"] },
   { id: "dead-bug", video: "XkTtXA3-IqU", nombre: "Dead bug", categoria: "fuerza", grupo: "core", segundos: 40,
+    img: "assets/img/video-dead-bug.jpg",
     claves: ["Tumbado, brazos al cielo", "Baja brazo y pierna contrarios despacio", "Lumbar pegada al suelo"] },
   { id: "superman", video: "FWaMfMSJy3I", nombre: "Superman", categoria: "fuerza", grupo: "core", segundos: 40,
+    img: "assets/img/video-superman.jpg",
     claves: ["Boca abajo, brazos delante", "Eleva suave brazos y pecho", "Cuello neutro, mirada al suelo"] },
   { id: "crunch-lateral", video: "NGXahixAFyY", nombre: "Crunch lateral", categoria: "fuerza", grupo: "core", segundos: 40,
     img: "assets/img/crunch-lateral.png", wger: 576,
