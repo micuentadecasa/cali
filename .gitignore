@@ -219,3 +219,6 @@ __marimo__/
 
 # Candidatos de media en exploración (no versionar hasta elegir)
 assets/img/candidates/
+
+# Sesiones locales de Lavish Editor
+.lavish/
