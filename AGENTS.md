@@ -34,3 +34,14 @@ aplica. No inventar indicaciones médicas.
   guardadas (favoritos/ocultos).
 - Export/import JSON en la app como copia de seguridad (cambio de dominio o
   limpieza del navegador).
+
+## Verificación visual
+
+- Para "ver" la app sin abrirla: Chrome headless
+  (`/Applications/Google Chrome.app/Contents/MacOS/Google Chrome --headless=new --enable-logging=stderr --dump-dom|--screenshot --window-size=... URL`).
+  En macOS headless el ancho mínimo de ventana es 500px: los pantallazos a 390px
+  se recortan pero NO indican overflow. Errores de la página aparecen como
+  `INFO:CONSOLE` en stderr.
+- Lección: no pongas listeners de `iniciar()` sobre elementos que solo existen
+  en pestañas renderizadas dinámicamente (p. ej. `#importar-archivo`) — un null
+  ahí mata todo el render. Engánchalos cuando se crea el elemento.
