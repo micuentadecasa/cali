@@ -155,6 +155,7 @@ body {
   border-radius: 16px; padding: 10px 14px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65);
 }
+.sesion-barra[hidden] { display: none; } /* el display:flex de arriba pisa el atributo hidden */
 .sesion-barra-info { display: flex; flex-direction: column; min-width: 0; }
 .sesion-barra-info strong {
   font-size: 11px; color: var(--texto-suave);

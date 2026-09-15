@@ -25,7 +25,6 @@ const App = (() => {
     });
     $("#vista").addEventListener("click", alClick);
     $("#sesion-barra").addEventListener("click", alClickBarra);
-    $("#importar-archivo").addEventListener("change", alImportar);
     pintar();
     Sesion.alternar(); // la sesión arranca sola al abrir, sin pulsar nada
   }
@@ -229,6 +228,7 @@ const App = (() => {
       Sesion.generar();
       pintar();
     });
+    $("#importar-archivo").addEventListener("change", alImportar); // el input solo existe en esta pestaña
   }
 
   // ── Eventos ─────────────────────────────────────────────────────────────
