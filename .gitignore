@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Candidatos de media en exploración (no versionar hasta elegir)
+assets/img/candidates/
