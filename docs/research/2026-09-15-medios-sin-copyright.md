@@ -106,10 +106,22 @@ wall sit, plancha lateral, sentadilla con salto. → Cubrir con Opción B o D.
 - Pexels: https://www.pexels.com/license/ (403 a bots; verificar en navegador)
 - Pixabay: https://pixabay.com/service/license-summary/ (ídem)
 
+## Decisión (2026-09-15, vía Lavish Editor)
+
+- **Plan elegido: 1 · Híbrido por secciones.** Estiramientos con la serie de
+  fotos de Davidgj32, fuerza con fotos de gimnasio estilo "Inicio/Movimiento",
+  y «para el resto usaremos lo que podamos» (prioridad de relleno: otra serie
+  de wger coherente → Wikimedia Commons → SVG propios para los 7 huecos).
+- **Vídeos: enlaces a wger** donde existan; nunca empaquetarlos en el repo.
+- **Descartado explícitamente** (feedback del revisor): pictogramas SVG como
+  dirección principal — solo como remiendo puntual para huecos sin foto.
+- Implementación: las 20 imágenes curadas ya viven en `assets/img/` con su
+  `ATTRIBUTIONS.md` autogenerado desde `candidates.json`.
+
 ## Estado y siguiente paso
 
-- Candidatos descargados en `assets/img/candidates/` (ignorado por git hasta
-  elegir). El script y este doc sí se versionan.
-- Pendiente de decisión: estilo visual único (fotos Davidgj32 para
-  estiramientos + ¿cuál para fuerza?, láminas Everkinetic, cartoon IA, fotos
-  Pexels a mano, o SVG propios) y cómo cubrir los 7 huecos listados.
+- Candidatos en `assets/img/candidates/` (ignorado por git); las imágenes del
+  plan elegido están versionadas en `assets/img/` + `ATTRIBUTIONS.md`.
+- Decisión tomada (ver sección anterior); siguiente paso: construir la app
+  (sesiones de 15 min, favoritos/ocultos, persistencia localStorage) y publicar
+  en GitHub Pages.
