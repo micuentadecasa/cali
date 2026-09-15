@@ -76,11 +76,11 @@ body {
 .tarjeta.actual { border-color: var(--acento); box-shadow: 0 0 0 3px var(--acento-suave); }
 .tarjeta.hecha { opacity: 0.45; }
 
-.tarjeta-media { position: relative; }
-.media-con-video { display: block; width: 100%; border: none; padding: 0; margin: 0; background: none; cursor: pointer; }
+.tarjeta-media { position: relative; padding-top: 56.25%; }
+.media-con-video { display: block; position: absolute; inset: 0; width: 100%; height: 100%; border: none; padding: 0; margin: 0; background: none; cursor: pointer; }
 .tarjeta-media img {
-  display: block; width: 100%;
-  aspect-ratio: 16 / 9; object-fit: cover; object-position: center top;
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
   border-radius: 12px; background: #fff;
 }
 .media-velo {
