@@ -52,7 +52,7 @@ const App = (() => {
       : `<div class="media-con-video">${interior}</div>`;
     // el vídeo ocupa EL MISMO hueco que la imagen: nada se desplaza
     const mediaInterno = embedAbierto
-      ? `<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/${e.video}?autoplay=1&playsinline=1&rel=0"
+      ? `<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/${e.video}?playsinline=1&rel=0"
           title="Vídeo de ${esc(e.nombre)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         <button class="cerrar-video" data-accion="video" aria-label="Cerrar vídeo">✕</button>`
       : `${clicable}
@@ -89,8 +89,6 @@ const App = (() => {
   // ── Sesión ──────────────────────────────────────────────────────────────
   function renderSesion(full = false) {
     if (!full) { actualizarConteo(); return; }
-    // solo cierra el vídeo si su ejercicio ya no está en la sesión actual
-    if (videoActivo && !Sesion.ejercicios().some((e) => e.id === videoActivo)) videoActivo = null;
     const ejercicios = Sesion.ejercicios();
     const resumen = Sesion.resumen();
     const p = Sesion.progreso();
@@ -151,6 +149,9 @@ const App = (() => {
       nodo.classList.toggle("actual", nodo.dataset.id === (e && e.id) && !p.terminada);
     });
   }
+
+  // cierra el vídeo abierto (p. ej. al avanzar de ejercicio, para que no siga sonando)
+  function cerrarVideo() { videoActivo = null; }
 
   function desplazarAActual() {
     if (!Sesion.progreso().corriendo) return;
@@ -327,5 +328,5 @@ const App = (() => {
   document.addEventListener("DOMContentLoaded", iniciar);
 
   // getter: prefs se lee en vivo, no se captura al cargar el módulo
-  return { get prefs() { return prefs; }, renderSesion, actualizarConteo, desplazarAActual };
+  return { get prefs() { return prefs; }, renderSesion, actualizarConteo, desplazarAActual, cerrarVideo };
 })();

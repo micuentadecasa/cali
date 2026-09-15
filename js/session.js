@@ -154,6 +154,7 @@ const Sesion = (() => {
     corriendo = idx < lista.length;
     if (!corriendo) clearInterval(temporizador);
     restante = lista[idx] ? lista[idx].segundos : 0;
+    App.cerrarVideo(); // al avanzar, el vídeo se cierra: nada sonando de fondo
     App.renderSesion(true); // avanza la tarjeta resaltada
     App.desplazarAActual();
   }
