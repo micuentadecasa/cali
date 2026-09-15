@@ -8,6 +8,7 @@ const App = (() => {
   let filtroBiblioteca = "todos";
   const hechos = new Set(); // marcas locales de la sesión en curso
   let videoActivo = null;   // id del ejercicio cuyo vídeo está embebido
+  const videosReproducidos = new Set(); // ya sonaron una vez: un re-render no los relanza
 
   const $ = (sel) => document.querySelector(sel);
   const esc = (t) =>
@@ -43,6 +44,7 @@ const App = (() => {
     const hecho = hechos.has(e.id);
     const videoUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(e.nombre + " ejercicio")}`;
     const embedAbierto = videoActivo === e.id && e.video;
+    const yaSono = videosReproducidos.has(e.id); // ya arrancó una vez: al re-renderizar, sin autoplay
     const etiqueta = esc(e.grupo ? (GRUPOS[e.grupo] || e.grupo) : (CATEGORIAS[e.categoria] ? CATEGORIAS[e.categoria].nombre : e.categoria || ""));
     const interior = e.img
       ? `<img src="${e.img}" alt="${esc(e.nombre)}" loading="lazy"><div class="media-velo"></div>`
@@ -50,15 +52,16 @@ const App = (() => {
     const clicable = e.video
       ? `<button class="media-con-video" data-accion="video" aria-label="Ver vídeo de ${esc(e.nombre)}">${interior}</button>`
       : `<div class="media-con-video">${interior}</div>`;
-    // el vídeo ocupa EL MISMO hueco que la imagen: nada se desplaza
+    // el vídeo ocupa EL MISMO hueco que la imagen y arranca solo la primera vez
     const mediaInterno = embedAbierto
-      ? `<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/${e.video}?playsinline=1&rel=0"
+      ? `<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/${e.video}?playsinline=1&rel=0${yaSono ? "" : "&autoplay=1"}"
           title="Vídeo de ${esc(e.nombre)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
         <button class="cerrar-video" data-accion="video" aria-label="Cerrar vídeo">✕</button>`
       : `${clicable}
         <span class="grupo-tag">${etiqueta}</span>
-        <h3 class="tarjeta-titulo">${esc(e.nombre)}<b class="duracion">${e.segundos}s</b></h3>
+        <h3 class="tarjeta-titulo">${esc(e.nombre)}<b class="duracion">${e.segundos}s</b>${e.repes ? `<b class="repes">${esc(e.repes)}</b>` : ""}</h3>
         ${e.video ? `<span class="btn-play-mini">▶</span>` : ""}`;
+    if (embedAbierto && !yaSono) videosReproducidos.add(e.id);
     const media = `<div class="tarjeta-media">${mediaInterno}</div>`;
     return `
       <article class="tarjeta ${actual ? "actual" : ""} ${hecho ? "hecha" : ""}" data-id="${e.id}">
@@ -150,8 +153,11 @@ const App = (() => {
     });
   }
 
-  // cierra el vídeo abierto (p. ej. al avanzar de ejercicio, para que no siga sonando)
-  function cerrarVideo() { videoActivo = null; }
+  // cierra el vídeo abierto (al avanzar de ejercicio) y olvida que sonó
+  function cerrarVideo() {
+    if (videoActivo) videosReproducidos.delete(videoActivo);
+    videoActivo = null;
+  }
 
   function desplazarAActual() {
     if (!Sesion.progreso().corriendo) return;
@@ -271,7 +277,12 @@ const App = (() => {
     } else if (accion === "video" && id) {
       const e = EJERCICIOS.find((x) => x.id === id);
       if (e && e.video) {
-        videoActivo = videoActivo === id ? null : id;
+        if (videoActivo === id) {
+          videoActivo = null;
+          videosReproducidos.delete(id); // cierre manual: si la reabres, arranca de nuevo
+        } else {
+          videoActivo = id;
+        }
         pestana === "ejercicios" ? renderBiblioteca() : renderSesion(true);
       }
     } else if (accion === "exportar") {

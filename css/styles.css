@@ -103,6 +103,7 @@ body {
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 .duracion { color: var(--acento); font-style: normal; margin-left: 6px; font-variant-numeric: tabular-nums; }
+.repes { color: #fff; opacity: 0.92; margin-left: 8px; font-style: normal; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; }
 .btn-play-mini {
   position: absolute; right: 9px; bottom: 9px; z-index: 1;
   width: 36px; height: 36px; border-radius: 50%;
