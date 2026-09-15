@@ -104,7 +104,7 @@ const EJERCICIOS = [
   { id: "est-lateral", video: "0Ri2ROhpNb8", nombre: "Estiramiento lateral de tronco", categoria: "estiramiento", segundos: 50,
     img: "assets/img/est-lateral.png", wger: 1861,
     claves: ["Brazo arriba, inclina a un lado", "Sin rotar el torso", "30 s por lado"] },
-  { id: "est-postura-nino", nombre: "Postura del niño", categoria: "estiramiento", segundos: 50,
+  { id: "est-postura-nino", video: "PC1IkjO1k5Q", nombre: "Postura del niño", categoria: "estiramiento", segundos: 50,
     img: "assets/img/childs-pose.png", wger: 1002,
     notaHombro: "Con los brazos a los lados del cuerpo para no cargar el hombro",
     claves: ["De rodillas, glúteos sobre talones", "Frente hacia el suelo", "Respira lento y profundo"] },
