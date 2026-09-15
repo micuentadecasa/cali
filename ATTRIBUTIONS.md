@@ -30,3 +30,20 @@ Los 7 huecos sin imagen (superman, gato-camello, dead bug, mountain climbers,
 wall sit, plancha lateral y crunch —la imagen de wger está corrupta en negro—)
 se cubrirán con SVG propios, Wikimedia Commons u otra imagen de wger, según el
 plan híbrido decidido el 2026-09-15.
+
+## Añadidas el 2026-09-15 (huecos del plan híbrido)
+
+| Archivo | Obra | Autor | Licencia | Fuente |
+|---|---|---|---|---|
+| `assets/img/gato-camello.jpg` | «Yoga at Your Park» (Bitilasana, recortada) | Mary O'Neill | Dominio público | https://commons.wikimedia.org/wiki/File:Yoga_at_Your_Park_-_Bitilasana.jpg |
+| `assets/img/plancha-lateral.jpg` | «Girl exercising side plank» | Tyler Read | CC BY 2.0 | https://commons.wikimedia.org/wiki/File:Girl_exercising_side_plank.jpg |
+| `assets/img/mountain-climbers.jpg` | «SETAF-AF NCOs conduct physical readiness training» | U.S. Army / Pfc. Cheshaon Jones | Dominio público | https://commons.wikimedia.org/wiki/File:SETAF-AF_NCOs_conduct_physical_readiness_training_(9713992).jpg |
+| `assets/img/crunch.png` | «Crunches» (2.ª imagen) | Everkinetic | CC-BY-SA 3.0 | https://wger.de/media/exercise-images/91/Crunches-2.png |
+| `assets/img/step-ups.png` | Step-ups | wger.de (sin autor declarado) | CC-BY-SA 4.0 | https://wger.de/media/exercise-images/981/f9377a7e-eb58-4cca-b805-2d36863aeb03.png |
+| `assets/img/kneeling-kickbacks.png` | Kneeling kickbacks | wger.de (sin autor declarado) | CC-BY-SA 4.0 | https://wger.de/media/exercise-images/990/de20457c-914a-45c9-8cf9-0ad9739759a1.png |
+| `assets/img/childs-pose.png` | Child's pose | wger.de (sin autor declarado) | CC-BY-SA 4.0 | https://wger.de/media/exercise-images/1002/ddf91765-8045-4087-bece-de17f33332ce.png |
+| `assets/img/high-knees.png` | High knees | wger.de (sin autor declarado) | CC-BY-SA 4.0 | https://wger.de/media/exercise-images/983/16245344-9957-4a24-8d61-f9939ed5f964.png |
+
+Sin foto a día de hoy (quedan con tile de «▶ Ver vídeo»): superman, dead bug y
+wall sit — Commons no tiene nada usable (búsquedas verificadas; salieron fotos
+que no corresponden al ejercicio).

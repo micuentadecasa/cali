@@ -26,6 +26,7 @@ const App = (() => {
     $("#sesion-barra").addEventListener("click", alClickBarra);
     $("#importar-archivo").addEventListener("change", alImportar);
     pintar();
+    Sesion.alternar(); // la sesión arranca sola al abrir, sin pulsar nada
   }
 
   function pintar() {
@@ -40,19 +41,22 @@ const App = (() => {
     const fav = !!prefs.favoritos[e.id];
     const oculto = !!prefs.ocultos[e.id];
     const hecho = hechos.has(e.id);
-    const enlace = e.wger
-      ? `<a class="enlace-wger" href="https://wger.de/es/exercise/${e.wger}/view" target="_blank" rel="noopener">Ficha y vídeo en wger ↗</a>`
-      : "";
+    const videoUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(e.nombre + " ejercicio")}`;
+    const media = e.img
+      ? `<img src="${e.img}" alt="${esc(e.nombre)}" loading="lazy">`
+      : `<a class="marcador-video" href="${videoUrl}" target="_blank" rel="noopener" aria-label="Ver vídeo de ${esc(e.nombre)}">▶</a>`;
     return `
       <article class="tarjeta ${actual ? "actual" : ""} ${hecho ? "hecha" : ""}" data-id="${e.id}">
-        <div class="tarjeta-media">${e.img
-          ? `<img src="${e.img}" alt="${esc(e.nombre)}" loading="lazy">`
-          : `<div class="marcador"><span>${e.emoji || "🏃"}</span></div>`}</div>
+        <div class="tarjeta-media">${media}</div>
         <div class="tarjeta-cuerpo">
           <header><h3>${esc(e.nombre)}</h3><span class="duracion">${e.segundos}s</span></header>
           ${e.notaHombro ? `<p class="nota-hombro">⚠️ ${esc(e.notaHombro)}</p>` : ""}
           <ul class="claves">${e.claves.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
-          ${enlace}
+          <div class="enlaces">
+            <a class="enlace-video" href="${videoUrl}" target="_blank" rel="noopener">▶ Ver vídeo</a>${e.wger
+              ? ` <a class="enlace-wger" href="https://wger.de/es/exercise/${e.wger}/view" target="_blank" rel="noopener">Ficha en wger ↗</a>`
+              : ""}
+          </div>
         </div>
         <div class="tarjeta-acciones">
           <button data-accion="fav" class="btn-icono ${fav ? "activo" : ""}" aria-label="Favorito">${fav ? "❤️" : "🤍"}</button>
