@@ -85,8 +85,25 @@ body {
 .claves { margin: 8px 0 0; padding-left: 18px; color: var(--texto-suave); font-size: 13px; }
 .claves li { margin: 2px 0; }
 .enlaces { margin-top: 8px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
-.enlace-video { font-size: 12.5px; font-weight: 700; color: var(--acento); text-decoration: none; }
+.enlace-video { background: none; border: none; padding: 0; cursor: pointer; font-size: 12.5px; font-weight: 700; color: var(--acento); text-decoration: none; font-family: inherit; }
 .enlace-wger { display: inline-block; font-size: 12px; color: var(--texto-suave); }
+.media-con-video { position: relative; display: inline-block; }
+.btn-play-mini {
+  position: absolute; right: 4px; bottom: 4px; width: 30px; height: 30px;
+  border-radius: 50%; border: none; background: rgba(16, 24, 40, 0.85);
+  color: #fff; font-size: 12px; cursor: pointer;
+}
+.video-embed {
+  grid-column: 1 / -1;
+  position: relative; aspect-ratio: 16 / 9;
+  border-radius: 12px; overflow: hidden; background: #000;
+}
+.video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.cerrar-video {
+  position: absolute; top: 6px; right: 6px; width: 28px; height: 28px;
+  border-radius: 50%; border: none; background: rgba(16, 24, 40, 0.85);
+  color: #fff; font-size: 13px; cursor: pointer;
+}
 
 .tarjeta-acciones { grid-column: 1 / -1; display: flex; align-items: center; gap: 10px; justify-content: flex-end; }
 .btn-icono {

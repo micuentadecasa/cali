@@ -7,6 +7,7 @@ const App = (() => {
   let pestana = "sesion";
   let filtroBiblioteca = "todos";
   const hechos = new Set(); // marcas locales de la sesión en curso
+  let videoActivo = null;   // id del ejercicio cuyo vídeo está embebido
 
   const $ = (sel) => document.querySelector(sel);
   const esc = (t) =>
@@ -42,18 +43,34 @@ const App = (() => {
     const oculto = !!prefs.ocultos[e.id];
     const hecho = hechos.has(e.id);
     const videoUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(e.nombre + " ejercicio")}`;
+    const embedAbierto = videoActivo === e.id && e.video;
+    const embed = embedAbierto
+      ? `<div class="video-embed">
+          <iframe src="https://www.youtube-nocookie.com/embed/${e.video}?autoplay=1&rel=0"
+            title="Vídeo de ${esc(e.nombre)}" allow="autoplay; encrypted-media; picture-in-picture"
+            allowfullscreen></iframe>
+          <button class="cerrar-video" data-accion="video" aria-label="Cerrar vídeo">✕</button>
+        </div>`
+      : "";
     const media = e.img
-      ? `<img src="${e.img}" alt="${esc(e.nombre)}" loading="lazy">`
-      : `<a class="marcador-video" href="${videoUrl}" target="_blank" rel="noopener" aria-label="Ver vídeo de ${esc(e.nombre)}">▶</a>`;
+      ? `<div class="media-con-video"><img src="${e.img}" alt="${esc(e.nombre)}" loading="lazy">${e.video
+          ? `<button class="btn-play-mini" data-accion="video" aria-label="Ver vídeo">▶</button>`
+          : ""}</div>`
+      : (e.video
+          ? `<button class="marcador-video" data-accion="video" aria-label="Ver vídeo de ${esc(e.nombre)}">▶</button>`
+          : `<a class="marcador-video" href="${videoUrl}" target="_blank" rel="noopener" aria-label="Ver vídeo de ${esc(e.nombre)}">▶</a>`);
     return `
       <article class="tarjeta ${actual ? "actual" : ""} ${hecho ? "hecha" : ""}" data-id="${e.id}">
+        ${embed}
         <div class="tarjeta-media">${media}</div>
         <div class="tarjeta-cuerpo">
           <header><h3>${esc(e.nombre)}</h3><span class="duracion">${e.segundos}s</span></header>
           ${e.notaHombro ? `<p class="nota-hombro">⚠️ ${esc(e.notaHombro)}</p>` : ""}
           <ul class="claves">${e.claves.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>
           <div class="enlaces">
-            <a class="enlace-video" href="${videoUrl}" target="_blank" rel="noopener">▶ Ver vídeo</a>${e.wger
+            ${e.video
+              ? `<button class="enlace-video" data-accion="video">▶ Ver vídeo</button>`
+              : `<a class="enlace-video" href="${videoUrl}" target="_blank" rel="noopener">▶ Ver vídeo</a>`}${e.wger
               ? ` <a class="enlace-wger" href="https://wger.de/es/exercise/${e.wger}/view" target="_blank" rel="noopener">Ficha en wger ↗</a>`
               : ""}
           </div>
@@ -73,6 +90,8 @@ const App = (() => {
   // ── Sesión ──────────────────────────────────────────────────────────────
   function renderSesion(full = false) {
     if (!full) { actualizarConteo(); return; }
+    // si avanzamos de ejercicio, cierra el vídeo del anterior
+    if (videoActivo && Sesion.actual() && Sesion.actual().id !== videoActivo) videoActivo = null;
     const ejercicios = Sesion.ejercicios();
     const resumen = Sesion.resumen();
     const p = Sesion.progreso();
@@ -247,6 +266,12 @@ const App = (() => {
         hechos.add(id);
         if (Sesion.actual() && Sesion.actual().id === id) Sesion.siguiente();
         else renderSesion(true);
+      }
+    } else if (accion === "video" && id) {
+      const e = EJERCICIOS.find((x) => x.id === id);
+      if (e && e.video) {
+        videoActivo = videoActivo === id ? null : id;
+        pestana === "ejercicios" ? renderBiblioteca() : renderSesion(true);
       }
     } else if (accion === "exportar") {
       descargarExport();
