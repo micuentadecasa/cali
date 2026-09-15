@@ -43,14 +43,6 @@ const App = (() => {
     const hecho = hechos.has(e.id);
     const videoUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(e.nombre + " ejercicio")}`;
     const embedAbierto = videoActivo === e.id && e.video;
-    const embed = embedAbierto
-      ? `<div class="video-embed">
-          <iframe src="https://www.youtube-nocookie.com/embed/${e.video}?autoplay=1&playsinline=1&rel=0"
-            title="Vídeo de ${esc(e.nombre)}" allow="autoplay; encrypted-media; picture-in-picture"
-            allowfullscreen></iframe>
-          <button class="cerrar-video" data-accion="video" aria-label="Cerrar vídeo">✕</button>
-        </div>`
-      : "";
     const etiqueta = esc(e.grupo ? (GRUPOS[e.grupo] || e.grupo) : (CATEGORIAS[e.categoria] ? CATEGORIAS[e.categoria].nombre : e.categoria || ""));
     const interior = e.img
       ? `<img src="${e.img}" alt="${esc(e.nombre)}" loading="lazy"><div class="media-velo"></div>`
@@ -58,16 +50,18 @@ const App = (() => {
     const clicable = e.video
       ? `<button class="media-con-video" data-accion="video" aria-label="Ver vídeo de ${esc(e.nombre)}">${interior}</button>`
       : `<div class="media-con-video">${interior}</div>`;
-    const media = `
-      <div class="tarjeta-media">
-        ${clicable}
+    // el vídeo ocupa EL MISMO hueco que la imagen: nada se desplaza
+    const mediaInterno = embedAbierto
+      ? `<iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/${e.video}?autoplay=1&playsinline=1&rel=0"
+          title="Vídeo de ${esc(e.nombre)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        <button class="cerrar-video" data-accion="video" aria-label="Cerrar vídeo">✕</button>`
+      : `${clicable}
         <span class="grupo-tag">${etiqueta}</span>
         <h3 class="tarjeta-titulo">${esc(e.nombre)}<b class="duracion">${e.segundos}s</b></h3>
-        ${e.video ? `<span class="btn-play-mini">▶</span>` : ""}
-      </div>`;
+        ${e.video ? `<span class="btn-play-mini">▶</span>` : ""}`;
+    const media = `<div class="tarjeta-media">${mediaInterno}</div>`;
     return `
       <article class="tarjeta ${actual ? "actual" : ""} ${hecho ? "hecha" : ""}" data-id="${e.id}">
-        ${embed}
         ${media}
         <div class="tarjeta-cuerpo">
           ${e.notaHombro ? `<p class="nota-hombro">⚠️ ${esc(e.notaHombro)}</p>` : ""}
