@@ -45,3 +45,5 @@ aplica. No inventar indicaciones médicas.
 - Lección: no pongas listeners de `iniciar()` sobre elementos que solo existen
   en pestañas renderizadas dinámicamente (p. ej. `#importar-archivo`) — un null
   ahí mata todo el render. Engánchalos cuando se crea el elemento.
+- Los embeds de YouTube dan error 153 desde `file://` (origen null); solo
+  funcionan desde el origen HTTPS publicado (o `localhost` con servidor).

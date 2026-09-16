@@ -58,3 +58,11 @@ js/app.js           UI (Sesión / Ejercicios / Ajustes)
 scripts/fetch_media_candidates.py  descarga de imágenes CC desde wger
 assets/img/         imágenes versionadas con licencia
 ```
+
+## Desarrollo en local
+
+Los embeds de YouTube **solo reproducen desde el origen publicado** (HTTPS de
+GitHub Pages). Si abres `index.html` directo con `file://`, YouTube responde
+con error 153: es su validación de origen, no un bug. Para probar en local con
+vídeos incluidos, sirve la carpeta: `python3 -m http.server 8000` y abre
+`http://localhost:8000`.
