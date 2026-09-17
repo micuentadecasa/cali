@@ -14,9 +14,14 @@ const App = (() => {
   const esc = (t) =>
     String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
+  function generarSesion(salt) {
+    Sesion.generar(salt);
+    prefs = Storage.registrarSesion(Sesion.ejercicios().map((e) => e.id));
+  }
+
   function iniciar() {
     prefs = Storage.cargar();
-    Sesion.generar();
+    generarSesion();
     document.querySelectorAll("[data-tab]").forEach((b) => {
       b.addEventListener("click", () => {
         pestana = b.dataset.tab;
@@ -196,7 +201,7 @@ const App = (() => {
         <div class="panel">
           <h3>Duración de la sesión</h3>
           <select id="minutos" class="selector">
-            ${[10, 15, 20].map((m) => `<option value="${m}" ${prefs.ajustes.minutos === m ? "selected" : ""}>${m} minutos</option>`).join("")}
+            ${[10, 15, 20, 25, 30].map((m) => `<option value="${m}" ${prefs.ajustes.minutos === m ? "selected" : ""}>${m} minutos</option>`).join("")}
           </select>
         </div>
 
@@ -227,7 +232,7 @@ const App = (() => {
       Storage.cambiarMinutos(Number(ev.target.value));
       prefs = Storage.cargar();
       hechos.clear();
-      Sesion.generar();
+      generarSesion();
       pintar();
     });
     $("#importar-archivo").addEventListener("change", alImportar); // el input solo existe en esta pestaña
@@ -246,7 +251,7 @@ const App = (() => {
 
     if (accion === "barajar") {
       hechos.clear();
-      Sesion.generar(Date.now() % 1000000);
+      generarSesion(Date.now() % 1000000);
       renderSesion(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (accion === "fav" && id) {
@@ -259,7 +264,7 @@ const App = (() => {
         Storage.ocultar(id);
         prefs = Storage.cargar();
         hechos.clear();
-        Sesion.generar();
+        generarSesion();
         pestana === "ejercicios" ? renderBiblioteca() : renderSesion(true);
       }
     } else if (accion === "restaurar" && id) {
@@ -294,7 +299,7 @@ const App = (() => {
       if (confirm("¿Borrar favoritos, ocultos y ajustes de este navegador?")) {
         prefs = Storage.reiniciar();
         hechos.clear();
-        Sesion.generar();
+        generarSesion();
         pintar();
       }
     }

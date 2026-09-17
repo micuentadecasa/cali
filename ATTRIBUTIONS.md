@@ -47,3 +47,39 @@ plan híbrido decidido el 2026-09-15.
 Sin foto a día de hoy (quedan con tile de «▶ Ver vídeo»): superman, dead bug y
 wall sit — Commons no tiene nada usable (búsquedas verificadas; salieron fotos
 que no corresponden al ejercicio).
+
+## Fotogramas de vídeo y ampliación de biblioteca (2026-09-15)
+
+Las tarjetas cuya imagen es un fotograma del vídeo enlazado usan una miniatura
+de referencia (24 archivos `video-*.jpg`); el vídeo es de cada autor y se
+reproduce desde YouTube en la app:
+
+| Archivo | Obra | Canal | Derechos | Fuente |
+|---|---|---|---|---|
+| `est-zancada-corredor.png` | Runners Lunge Stretch | Davidgj32 | CC-BY-SA 4.0 | https://wger.de/media/exercise-images/1874/66fca8a5-41e8-42d1-8776-5e46a4902650.png |
+| `head-turns.png` | Head turns | (sin autor declarado) | CC-BY-SA 4.0 | https://wger.de/media/exercise-images/1007/757846d3-78e4-4068-bbca-62e567372c94.png |
+| `tobillos.png` | ankle dorsiflexion rocks | Davidgj32 | CC-BY-SA 4.0 | https://wger.de/media/exercise-images/1804/691c69b8-c3db-4177-8435-dd3a97d88542.webp |
+| `video-abduccion-tumbado.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Fitness Consciente | © su autor · miniatura de referencia | https://youtu.be/Q2Cokw_clyw |
+| `video-abrazo-rodilla.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Fitness Vitae | © su autor · miniatura de referencia | https://youtu.be/ZDpA2BloL7s |
+| `video-balanceo-piernas.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Strong Runner | © su autor · miniatura de referencia | https://youtu.be/B8b_XlFeu3I |
+| `video-circulos-hombros.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Juan Mora | © su autor · miniatura de referencia | https://youtu.be/8xQao07OrF0 |
+| `video-dead-bug.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Proet Ejercicio Terapéutico | © su autor · miniatura de referencia | https://youtu.be/XkTtXA3-IqU |
+| `video-esfinge.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | SEReumatologia | © su autor · miniatura de referencia | https://youtu.be/by_gvo1FCdQ |
+| `video-est-zancada-corredor.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Proet Ejercicio Terapéutico | © su autor · miniatura de referencia | https://youtu.be/2kfJTHITa4w |
+| `video-flexion-inclinada.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Instituto de Entrenamiento | © su autor · miniatura de referencia | https://youtu.be/uCTbmCjiF7Y |
+| `video-giros-brazos.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Juan Mora | © su autor · miniatura de referencia | https://youtu.be/_zNxZGOjNXk |
+| `video-head-turns.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Higea Salud | © su autor · miniatura de referencia | https://youtu.be/qp5CHrB1cNY |
+| `video-marcha-suave.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Lucía Mingorance | © su autor · miniatura de referencia | https://youtu.be/0e4251eQAE8 |
+| `video-mariposa.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Proet Ejercicio Terapéutico | © su autor · miniatura de referencia | https://youtu.be/qrlkNhxDlBs |
+| `video-puente-unapierna.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Proet Ejercicio Terapéutico | © su autor · miniatura de referencia | https://youtu.be/Mege8_sbT6M |
+| `video-rotacion-tronco.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | AD Fisioterapia Valencia | © su autor · miniatura de referencia | https://youtu.be/7dlcn_yWqBU |
+| `video-sentadilla-bulgara.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Ponte en forma con Sanitas | © su autor · miniatura de referencia | https://youtu.be/klq4ahI59sY |
+| `video-sentadilla-salto.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Strong Runner | © su autor · miniatura de referencia | https://youtu.be/IiHH0EWo8-k |
+| `video-sentadilla-sumo.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Aaron Martinez | © su autor · miniatura de referencia | https://youtu.be/ov0Vm_JFglo |
+| `video-skater.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | The Active Life | © su autor · miniatura de referencia | https://youtu.be/Xz27DudBfSs |
+| `video-superman.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Strong Runner | © su autor · miniatura de referencia | https://youtu.be/FWaMfMSJy3I |
+| `video-tijeras.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Meli Cardenas | © su autor · miniatura de referencia | https://youtu.be/V9V-XXHo294 |
+| `video-tobillos.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Miguel Ángel Vialcho | © su autor · miniatura de referencia | https://youtu.be/ykS__niktzg |
+| `video-tocar-puntas.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | ATHLENER | © su autor · miniatura de referencia | https://youtu.be/zHbxwCy1KTI |
+| `video-wall-sit.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | VikikaTeam | © su autor · miniatura de referencia | https://youtu.be/-qXuHrdmk4g |
+| `video-zancada-lateral.jpg` | Fotograma del vídeo de demostración (enlazado en la propia tarjeta) | Proet Ejercicio Terapéutico | © su autor · miniatura de referencia | https://youtu.be/6A7A8ua-sKQ |

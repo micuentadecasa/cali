@@ -12,7 +12,8 @@ const Storage = (() => {
       schema: ESQUEMA,
       favoritos: {},      // { [idEjercicio]: true }
       ocultos: {},        // { [idEjercicio]: { desde: ISO } }
-      ajustes: { minutos: 15 },
+      ajustes: { minutos: 20, usuarioFijo: false },
+      ultimasSesiones: [], // últimos 2 entrenamientos: la rotación los penaliza
       appVersion: "1.0.0",
     };
   }
@@ -32,7 +33,12 @@ const Storage = (() => {
     const base = porDefecto();
     // Futuras versiones: if (datos.schema === 1) { ...; datos.schema = 2; }
     if (!datos || typeof datos !== "object" || datos.schema > ESQUEMA) return base;
-    return { ...base, ...datos, ajustes: { ...base.ajustes, ...(datos.ajustes || {}) } };
+    const pref = { ...base, ...datos, ajustes: { ...base.ajustes, ...(datos.ajustes || {}) } };
+    // v1→v1.1: sesiones más completas (20 min) salvo que el usuario las fijara
+    if (pref.schema === 1 && pref.ajustes.minutos === 15 && !pref.ajustes.usuarioFijo) {
+      pref.ajustes.minutos = 20;
+    }
+    return pref;
   }
 
   function guardar(prefs) {
@@ -63,7 +69,16 @@ const Storage = (() => {
   function cambiarMinutos(minutos) {
     const p = cargar();
     p.ajustes.minutos = minutos;
+    p.ajustes.usuarioFijo = true;
     guardar(p);
+  }
+
+  // guarda los ids de la sesión recién generada (máximo 2 en memoria)
+  function registrarSesion(ids) {
+    const p = cargar();
+    p.ultimasSesiones = [[...ids], ...(p.ultimasSesiones || []).slice(0, 1)];
+    guardar(p);
+    return p;
   }
 
   function exportar() {
@@ -84,5 +99,5 @@ const Storage = (() => {
     return cargar();
   }
 
-  return { cargar, alternarFavorito, ocultar, restaurar, cambiarMinutos, exportar, importar, reiniciar, CLAVE };
+  return { cargar, alternarFavorito, ocultar, restaurar, cambiarMinutos, registrarSesion, exportar, importar, reiniciar, CLAVE };
 })();

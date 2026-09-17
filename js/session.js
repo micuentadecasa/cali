@@ -28,18 +28,34 @@ const Sesion = (() => {
   }
 
   function barajarConPeso(arr, rnd) {
-    // Fisher-Yates estable por clave: favoritos tienden a salir antes.
+    // Peso por ejercicio: favoritos ×3 (salen antes); los de la última sesión
+    // ×0,15 y de la penúltima ×0,4 → "otra sesión" se nota de verdad.
+    const peso = (e) => {
+      let f = App.prefs.favoritos[e.id] ? 3 : 1;
+      const ultimas = App.prefs.ultimasSesiones || [];
+      if (ultimas[0] && ultimas[0].includes(e.id)) f *= 0.15;
+      else if (ultimas[1] && ultimas[1].includes(e.id)) f *= 0.4;
+      return f;
+    };
     return arr
-      .map((e) => ({ e, k: rnd() / (App.prefs.favoritos[e.id] ? 3 : 1) }))
+      .map((e) => ({ e, k: rnd() / peso(e) }))
       .sort((a, b) => a.k - b.k)
       .map(({ e }) => e);
   }
 
   function rellenarBloque(candidatos, presupuesto, usados, rnd) {
-    const elegidos = [];
-    let acum = 0;
+    // Dos pasadas: primero los que NO salieron en la última sesión; los
+    // repetidos solo entran si tras agotar los frescos queda presupuesto.
+    const enUltima = (App.prefs.ultimasSesiones || [])[0] || [];
+    const frescos = [], repetidos = [];
     for (const e of barajarConPeso(candidatos, rnd)) {
       if (usados.has(e.id)) continue;
+      (enUltima.includes(e.id) ? repetidos : frescos).push(e);
+    }
+    const elegidos = [];
+    let acum = 0;
+    for (const e of [...frescos, ...repetidos]) {
+      if (usados.has(e.id) || acum >= presupuesto) break;
       if (acum + e.segundos > presupuesto && acum >= presupuesto * 0.66) break;
       elegidos.push(e);
       usados.add(e.id);
@@ -74,6 +90,7 @@ const Sesion = (() => {
       [ordenGrupos[i], ordenGrupos[j]] = [ordenGrupos[j], ordenGrupos[i]];
     }
     const presupuesto = total * 0.6;
+    const enUltima = (App.prefs.ultimasSesiones || [])[0] || [];
     let acum = 0;
     let ronda = 0;
     while (acum < presupuesto) {
@@ -84,7 +101,8 @@ const Sesion = (() => {
           disponibles.filter((e) => e.grupo === grupo && !usados.has(e.id)),
           rnd
         );
-        const e = candidatos[0];
+        // prioriza los que no estuvieron en la última sesión
+        const e = candidatos.find((x) => !enUltima.includes(x.id)) || candidatos[0];
         if (e) {
           lista.push(e);
           usados.add(e.id);
